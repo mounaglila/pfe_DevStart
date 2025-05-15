@@ -908,7 +908,9 @@ if not exist "%projectDir%" (
 )
 
 echo ===== All components and shared service generated successfully! =====
-start move angular-project ../../projet
+
+move angular-project ../../projet
+
 endlocal
 
 
