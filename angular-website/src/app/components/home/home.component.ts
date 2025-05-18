@@ -11,21 +11,23 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  technologies = [
-    // Frontend
-    { name: 'React', icon: 'react.png' },
-    { name: 'Angular', icon: 'angular.png' },
-    { name: 'Vue.js', icon: 'vuejs.png' },
-    // Backend
-    { name: 'Node.js', icon: 'node.png' },
-    { name: 'Spring Boot', icon: 'springboot.png' },
-    { name: 'Django', icon: 'django.png' }
+
+  frontendFrameworks = [
+  { name: 'React', icon: 'react.png' },
+  { name: 'Angular', icon: 'angular.png' },
+  { name: 'Vue.js', icon: 'vuejs.png' }
+  ];
+
+  backendFrameworks = [
+  { name: 'Node.js', icon: 'node.png' },
+  { name: 'Spring Boot', icon: 'springboot.png' },
+  { name: 'Django', icon: 'django.png' }
   ];
 
   databases = [
     { name: 'PostgreSQL', icon: 'postgresql.png' },
     { name: 'MySQL', icon: 'mysql.png' },
-    { name: 'MongoDB', icon: 'mongo.png' }
+    { name: 'MongoDB', icon: 'Mongo.jpg' }
   ];
 
   features = [
@@ -55,7 +57,7 @@ export class HomeComponent {
       icon: 'fas fa-chart-line'
     }
   ];
-  
+
 
   steps = [
     {
@@ -73,6 +75,7 @@ export class HomeComponent {
       title: '🚀 Generate Project',
       description: 'Download your project and start coding right away'
     }
-    
+
   ];
+
 }

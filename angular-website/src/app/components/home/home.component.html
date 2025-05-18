@@ -15,21 +15,36 @@
     <h2>Supported Technologies</h2>
     <p class="section-description">You can choose from a variety of modern frameworks and databases</p>
 
+     <h3 style="text-align:center; margin-top: 2rem;">Frontend Frameworks</h3>
     <div class="tech-grid">
-      <div class="tech-item" *ngFor="let tech of technologies">
-        <div class="tech-icon">
-          <img [src]="'assets/images/' + tech.icon" [alt]="tech.name">
-        </div>
-        <span>{{ tech.name }}</span>
+    <div class="tech-item" *ngFor="let tech of frontendFrameworks">
+      <div class="tech-icon">
+        <img [src]="'assets/images/' + tech.icon" [alt]="tech.name" />
       </div>
-      <div class="tech-item" *ngFor="let db of databases">
-        <div class="tech-icon">
-          <img [src]="'assets/images/' + db.icon" [alt]="db.name">
-        </div>
-        <span>{{ db.name }}</span>
-      </div>
+      <span>{{ tech.name }}</span>
     </div>
-  </section>
+  </div>
+
+  <h3 style="text-align:center; margin-top: 2rem;">Backend Frameworks</h3>
+  <div class="tech-grid">
+    <div class="tech-item" *ngFor="let tech of backendFrameworks">
+      <div class="tech-icon">
+        <img [src]="'assets/images/' + tech.icon" [alt]="tech.name"  />
+      </div>
+      <span>{{ tech.name }}</span>
+    </div>
+  </div>
+
+  <h3 style="text-align:center; margin-top: 2rem;">Databases</h3>
+  <div class="tech-grid">
+    <div class="tech-item" *ngFor="let db of databases">
+      <div class="tech-icon">
+        <img [src]="'assets/images/' + db.icon" [alt]="db.name" />
+      </div>
+      <span>{{ db.name }}</span>
+    </div>
+  </div>
+</section>
 
   <!-- Features Section -->
   <section class="features">
@@ -64,3 +79,6 @@
     </div>
   </section>
 </div>
+<img src="assets/images/react.png" alt="React Logo" width="200" />
+
+

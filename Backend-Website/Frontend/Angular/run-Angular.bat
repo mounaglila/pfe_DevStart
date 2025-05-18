@@ -1,10 +1,11 @@
-@echo off
+@echo on
 echo ===== Setting up Angular Frontend =====
 
 :: Enable delayed variable expansion for dynamic variables inside loops
 setlocal enabledelayedexpansion
 
 :: Define the Angular project folder
+set scriptDir=%~dp0
 set projectDir=%~dp0angular-project
 set projectName=angular-project
 
@@ -493,6 +494,7 @@ if not exist "%projectDir%" (
     echo } >>src\app\sidebar\sidebar.component.ts
     echo } >>src\app\sidebar\sidebar.component.ts
 
+    echo %items%
     for %%i in (%items%) do (
         echo Generating component %%i
         ng g c %%i --standalone
@@ -897,20 +899,36 @@ if not exist "%projectDir%" (
     
 :: Install dependencies after generation
     echo ===== Installing dependencies... This may take some time... =====
+    cd %scriptDir%
+    dir
+    echo scriptDir .. %scriptDir%
+    echo cd .. %cd% 
+
+    move angular-project ../../projet/angular-project 
+   :: npm install 
     if errorlevel 1 (
         echo Failed to install dependencies!
         exit /b
-)
-
+    )
+    pause
 ) else (
     echo Angular project already exists!
     cd "%projectDir%"
 )
 
 echo ===== All components and shared service generated successfully! =====
+:: Define script path (DON'T use PATH, it's a system variable)
+set "SCRIPT_PATH=%~dp0angular-project"
 
-move angular-project ../../projet
+:: Check if folder exists (was index.js — not correct for Angular)
+if not exist "%SCRIPT_PATH%\angular.json" (
+    echo Angular project not found: %SCRIPT_PATH%
+    exit /b
+)
 
+cd /d "%SCRIPT_PATH%"
+
+:: Start the Angular server
+echo Starting the server...
+start ng serve
 endlocal
-
-

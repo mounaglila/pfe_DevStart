@@ -8,6 +8,7 @@ const PORT = 5000;
 app.use(express.json()); 
 // Active CORS 
 app.use(cors()); 
+app.use('/downloads', express.static(path.join(__dirname, 'public')));
 
 app.post("/", (req, res) => {
     const { frontend, backend, DB_URI, dbName, username, password, TypeDB, port } = req.body;
@@ -16,7 +17,7 @@ app.post("/", (req, res) => {
     const scriptPath = path.join(__dirname, "Backend", `${backend}`, `run-${backend}-${TypeDB}.bat`);
     const scriptPath2 = path.join(__dirname, "Frontend", `${frontend}`, `run-${frontend}.bat`);
     if (backend) {
-        const command = `cmd /c ""${scriptPath}" "${DB_URI}" "${dbName}" "${port}" "${username}" "${password}""`;
+        const command = `cmd /c ""${scriptPath}" "${DB_URI}" "${dbName}" "${username}" "${password}" "${port}"  "`;
 
         console.log(`Executing command: ${command}`);
         exec(command, (err, stdout, stderr) => {
@@ -33,7 +34,7 @@ app.post("/", (req, res) => {
     }if (frontend) {
         // Wait few seconds before executing the frontend script
         setTimeout(() => {
-            const command = `cmd /c "${scriptPath2}" `;
+            const command = `cmd /c "${scriptPath2}" > log.txt 2>&1 `;
 
             console.log(`Executing command: ${command}`);
 

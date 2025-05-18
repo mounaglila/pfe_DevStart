@@ -1,3 +1,4 @@
+import { DownloadService } from './../../services/download.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +18,7 @@ interface Step {
 export class GenerateProjectComponent implements OnInit {
   progress = 0;
   currentStep = 0;
-  
+
   steps: Step[] = [
     { title: ' Initializing Project ', status: 'pending' },
     { title: 'Connecting to your Database', status: 'in-progress' },
@@ -57,7 +58,6 @@ export class GenerateProjectComponent implements OnInit {
       ]
     }
   };
-  
 
   ngOnInit() {
     this.startGeneration();
@@ -80,16 +80,9 @@ export class GenerateProjectComponent implements OnInit {
       }
     }, 2000);
   }
-
-  downloadProject() {
-    // Here you would implement the actual download logic
-    console.log('Downloading project.zip...');
-    // For now, we'll just create a dummy download link
-    const link = document.createElement('a');
-    link.href = 'path/to/your/project.zip';
-    link.download = 'project.zip';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  constructor(private DownloadService:DownloadService ){
   }
+   downloadProject() {
+  this.DownloadService.downloadFile();
+}
 }
