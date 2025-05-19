@@ -1,14 +1,34 @@
+// Requires
 const express = require("express");
 const { exec } = require("child_process");
 const path = require("path");
-const cors = require('cors'); 
+const cors = require('cors');
+const archiver = require('archiver');
+
 const app = express();
 const PORT = 5000;
 
-app.use(express.json()); 
-// Active CORS 
-app.use(cors()); 
+app.use(express.json());
+app.use(cors());
 app.use('/downloads', express.static(path.join(__dirname, 'public')));
+
+// Your existing POST route...
+
+app.get('/zip-download/projet.zip', (req, res) => {
+    const folderPath = path.join(__dirname, 'projet');
+    const zipFileName = 'projet.zip';
+
+    res.setHeader('Content-Disposition', 'attachment; filename=' + zipFileName);
+    res.setHeader('Content-Type', 'application/zip');
+
+    const archive = archiver('zip', {
+        zlib: { level: 9 }
+    });
+
+    archive.directory(folderPath, false);
+    archive.pipe(res);
+    archive.finalize();
+});
 
 app.post("/", (req, res) => {
     const { frontend, backend, DB_URI, dbName, username, password, TypeDB, port } = req.body;

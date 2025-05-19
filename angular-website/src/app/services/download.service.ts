@@ -9,7 +9,7 @@ export class DownloadService {
   constructor(private http: HttpClient) {}
 
   downloadFile() {
-    const fileUrl = 'http://localhost:5000/downloads/project.zip';
+    const fileUrl = 'http://localhost:5000/zip-download/projet.zip';
     this.http.get(fileUrl, {
       responseType: 'blob',
     }).subscribe((response) => {
@@ -19,4 +19,3 @@ export class DownloadService {
     });
   }
 }
-
